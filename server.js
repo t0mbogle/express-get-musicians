@@ -10,17 +10,10 @@ app.get('/musicians', async (req, res) => {
     const allMusicians = await Musician.findAll();
     res.json(allMusicians)
 })
-app.get('/musician1', async (req, res) => {
-    const musician1 = await Musician.findAll({ where: { id: 1} });
-    res.json(musician1)
-})
-app.get('/musician2', async (req, res) => {
-    const musician2 = await Musician.findAll({ where: { id: 2} });
-    res.json(musician2)
-})
-app.get('/musician3', async (req, res) => {
-    const musician3 = await Musician.findAll({ where: { id: 3} });
-    res.json(musician3)
+
+app.get('/musicians/:id', async (req, res) => {
+    const musician = await Musician.findAll({ where: { id: req.params.id }})
+    res.json(musician)
 })
 
 app.listen(port, () => {
