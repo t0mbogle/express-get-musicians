@@ -1,7 +1,6 @@
 const express = require('express');
 const musicianRouter = express.Router();
 const {Musician} = require("../Musician");
-// const {sequelize} = require("../db")
 
 // reading
 musicianRouter.get('/musicians', async (req, res) => {

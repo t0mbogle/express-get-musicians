@@ -1,6 +1,5 @@
 const express = require("express");
 const app = express();
-// const {Musician} = require("./Musician")
 const {sequelize} = require("./db");
 const musicianRouter = require("./routes/musicianRouter");
 
