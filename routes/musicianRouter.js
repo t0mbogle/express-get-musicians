@@ -1,3 +1,4 @@
+const { check, validationResult } = require('express-validator')
 const express = require('express');
 const musicianRouter = express.Router();
 const {Musician} = require("../Musician");
@@ -15,12 +16,21 @@ musicianRouter.get('/musicians/:id', async (req, res) => {
 
 
 // creating
-musicianRouter.post('/musicians', async (req, res) => {
-    const newMusician = await Musician.create({
-        name: req.body.name,
-        instrument: req.body.instrument
-    });
-    res.status(201).send({ msg: "Successfully added musician", newMusician });
+musicianRouter.post('/musicians', [
+    check("name").not().isEmpty().trim(), 
+    check("instrument").not().isEmpty().trim(),
+    check("name").isLength({ min: 2, max: 20 })
+], async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        res.json({ error: errors.array() })
+    } else {
+        const newMusician = await Musician.create({
+            name: req.body.name,
+            instrument: req.body.instrument
+        });
+        res.status(201).send({ msg: "Successfully added musician", newMusician });
+    }
 })
 
 

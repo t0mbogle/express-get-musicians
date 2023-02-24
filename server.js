@@ -6,8 +6,8 @@ const musicianRouter = require("./routes/musicianRouter");
 const port = 3000;
 app.use(express.json()); // parsing middleware
 
-app.use("/", musicianRouter)    // get all, create
-app.use("/:id", musicianRouter) // get specific, update, delete
+app.use("/", musicianRouter)    // get all, post
+app.use("/:id", musicianRouter) // get specific, put, delete
 
 
 app.listen(port, () => {
